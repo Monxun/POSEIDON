@@ -1,0 +1,35 @@
+# DASHBOARD
+WALLPAPER_FILE: ./wallpapers
+POSEIDON_USER: Monxun
+
+# KEPTN
+KEPTN_ENABLE: False # Toggles Keptn Cluster Creation
+KEPTN_REMOTE: False # Use remote host instead of localhost
+KEPTN_HOST: localhost # default localhost : remote server ip
+KEPTN_HOST_INVENTORY_ENABLE: False # Toggles using inventory vs. ipd
+KEPTN_HOST_CREDENTIALS: ./keys/keptn_host.json
+KEPTN_HOST_USERNAME: none
+KEPTN_HOST_PASSWORD: none
+
+# PROVIDERS
+AWS_ENABLE: False
+AWS_CREDENTIALS: ./keys/aws.json
+GOOGLE_CLOUD_ENABLE: False
+GOOGLE_CLOUD_CREDENTIALS: ./keys/google.json
+AZURE_ENABLE: False
+AZURE_CREDENTIALS: ./keys/azure.json
+DIGITAL_OCEAN_ENABLE: False
+DIGITAL_OCEAN_CREDENTIALS: ./keys/azure.json
+
+# APPS
+NGINX_PROXY_MANAGER_ENABLE: False 
+GUACAMOLE_ENABLE: False 
+MINIO_ENABLE: False 
+GITLAB_ENABLE: False
+PROMETHEUS_ENABLE: False
+DYNATRACE_ENABLE: False
+JENKINS_X_ENABLE: False
+
+# WEBHOOKS
+SLACK_WEBHOOK_ENABLE: False
+GITHUB_ACTIONS_WEBHOOK_ENABLE: False
