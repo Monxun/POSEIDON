@@ -5,9 +5,6 @@ metadata:
   namespace: jenkins-stack
   labels:
     app.kubernetes.io/name: docker
-    app.kubernetes.io/part-of: jenkins
-    app.kubernetes.io/scope: devops-with-saeid
-    app.kubernetes.io/created-by: ssbostan
 spec:
   accessModes:
     - ReadWriteOnce
@@ -22,9 +19,6 @@ metadata:
   namespace: jenkins-stack
   labels:
     app.kubernetes.io/name: docker
-    app.kubernetes.io/part-of: jenkins
-    app.kubernetes.io/scope: devops-with-saeid
-    app.kubernetes.io/created-by: ssbostan
 spec:
   accessModes:
     - ReadWriteOnce
@@ -39,9 +33,6 @@ metadata:
   namespace: jenkins-stack
   labels:
     app.kubernetes.io/name: docker
-    app.kubernetes.io/part-of: jenkins
-    app.kubernetes.io/scope: devops-with-saeid
-    app.kubernetes.io/created-by: ssbostan
 spec:
   accessModes:
     - ReadWriteOnce
