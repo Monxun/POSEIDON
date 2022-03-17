@@ -1,3 +1,7 @@
+#!/bin/sh
+
+set -o errexit
+
 # CREATE KIND CLUSTER
 cat <<EOF | kind create cluster --config=-
 kind: Cluster
