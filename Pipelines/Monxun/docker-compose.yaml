@@ -6,14 +6,10 @@ services:
     container_name: poseidon
     volumes:
       - /flame/data:/app/data
-      - /var/run/docker.sock:/var/run/docker.sock # optional but required for Docker integration
     ports:
       - 5005:5005
-    secrets:
-      - password # optional but required for (1)
     environment:
-      - PASSWORD=flame_password
-      - PASSWORD_FILE=/run/secrets/password # optional but required for (1)
+      - PASSWORD=poseidon
     restart: unless-stopped
     networks:
       - cicd

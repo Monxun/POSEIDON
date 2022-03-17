@@ -33,9 +33,9 @@ spec:
             - name: DOCKER_TLS_VERIFY
               value: "1"
             - name: TZ
-              value: Asia/Tehran
+              value: UTC0
             - name: JAVA_OPTS
-              value: -Duser.timezone=Asia/Tehran
+              value: -Duser.timezone=UTC0
           ports:
             - containerPort: 50000
             - containerPort: 8080

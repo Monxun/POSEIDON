@@ -1,0 +1,31 @@
+# VALUES
+namespace: dev
+replicaCount: 1
+
+# SECRET KEYS
+appUserAccessKey: AKIATRKPORPJQVZACE55
+appUserSecretKey: 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
+encryptSecretKey: ThisIsAGreatSecretKey!!!
+jwtSecretKey: 21b4054a-1c75-4e8a-aacd-93aaaad92e19
+rootPassword: root
+
+# ADMINER THEME
+adminerDesign: dracula
+
+# HOST ADDRESS FOR IMAGE REPOSITORY
+repoAddress: localhost:5001
+
+# MICROSERVICE IMAGE VERSIONS
+bankVersion: 0.1
+transactionVersion: 0.1
+underwriterVersion: 0.1
+userVersion: 0.1
+
+# CI IMAGE VERSIONS
+producerVersion: 0.1
+
+# INGRESS HOST ADDRESS
+hostname: localhost
+
+# S3 EMAIL TEMPLATE BUCKET
+s3TemplateBucket: s3://jh-alinefinancial-email-templates

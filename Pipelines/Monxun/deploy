@@ -2,7 +2,7 @@
 
 # All rights reserved, Saeid Bostandoust <ssbostan@linuxmail.org>.
 
-echo "INFO: Welcome to \"DevOps with Saeid\" class (www.devops-with-saeid.com)."
+echo "POSEIDON: Initialize..."
 
 which docker-compose &> /dev/null
 

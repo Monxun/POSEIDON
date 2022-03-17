@@ -1,0 +1,42 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: ci-producer
+  namespace: {{ .Values.namespace }}
+spec:
+  ports:
+  - port: 5050
+    targetPort: 5050
+    protocol: TCP
+  type: ClusterIP
+  selector:
+    app: ci-producer
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: ci-producer
+  namespace: {{ .Values.namespace }}
+spec:
+  selector:
+    matchLabels:
+      app: ci-producer
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      labels:
+        app: ci-producer
+    spec:
+      containers:
+      - name: ci-producer
+        image: {{ .Values.repoAddress }}/ci-producer:{{ .Values.producerVersion }}
+        # imagePullPolicy: Never
+        envFrom:
+          - configMapRef:
+              name: aline-configmap
+          - secretRef:
+              name: aline-secrets
+        ports:
+        - containerPort: 5050
+          name: ci-producer

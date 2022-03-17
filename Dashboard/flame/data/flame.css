@@ -1,0 +1,24 @@
+@media (min-width: 0px) {
+  .WeatherWidget {
+    visibility: visible;
+  }
+  body {
+      background: url(uploads/7.jpg); 
+      background-size: cover;
+      background-repeat: no-repeat;
+      background-attachment: fixed;
+  }
+  .BookmarkCard_BookmarkCard__1GmHc, .AppGrid_AppGrid__33iLW {
+      margin: 20px;
+      background-color: rgba(0,0,0,.5);
+      padding: 20px;
+  }
+  .AppCard_AppCard__1V2_0 {
+      padding: 4px !important;
+      border-radius: 4px;
+      transition: all .1s;
+  }
+  .AppCard_AppCard__1V2_0:hover {
+      background: rgba(0,0,0,1) !important;
+  }
+}

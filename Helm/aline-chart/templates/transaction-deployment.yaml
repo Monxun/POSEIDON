@@ -1,0 +1,45 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: ms-transaction
+  namespace: {{ .Values.namespace }}
+spec:
+  ports:
+  - port: 8073
+    targetPort: 8073
+    protocol: TCP
+  type: ClusterIP
+  selector:
+    app: ms-transaction
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: ms-transaction
+  namespace: {{ .Values.namespace }}
+  labels:
+    app: ms-transaction
+spec:
+  selector:
+    matchLabels:
+      app: ms-transaction
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      labels:
+        app: ms-transaction
+    spec:
+      containers:
+      - name: ms-transaction
+        image: {{ .Values.repoAddress }}/ms-transaction:{{ .Values.transactionVersion }}
+        # imagePullPolicy: Never
+        envFrom:
+          - configMapRef:
+              name: aline-configmap
+          - secretRef:
+              name: aline-secrets
+        ports:
+        - containerPort: 8073
+          name: ms-transaction
+      restartPolicy: Always

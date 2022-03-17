@@ -5,9 +5,6 @@ metadata:
   namespace: jenkins-stack
   labels:
     app.kubernetes.io/name: registry
-    app.kubernetes.io/part-of: jenkins
-    app.kubernetes.io/scope: devops-with-saeid
-    app.kubernetes.io/created-by: ssbostan
 data:
   REGISTRY_FIELDS_ENVIRONMENT: production
   REGISTRY_HTTP_ADDR: 0.0.0.0:443

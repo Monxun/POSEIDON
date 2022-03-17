@@ -20,7 +20,7 @@ spec:
           image: gitea/gitea:1.14
           env:
             - name: TZ
-              value: Asia/Tehran
+              value: UTC0
           resources:
             requests:
               cpu: 500m
