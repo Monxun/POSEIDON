@@ -1,6 +1,20 @@
 version: !!str 3
 
 services:
+  rancher:
+    image: rancher/rancher:latest
+    container_name: rancher
+    volumes:
+      - rancher-vol:/var/lib/rancher
+    restart: unless-stopped
+    ports:
+      - '543:443'
+      - '144:80'
+    networks:
+      - cicd
+    labels:
+      - "app.dws.name=rancher"
+
   flame:
     image: pawelmalak/flame
     container_name: poseidon
@@ -149,3 +163,4 @@ volumes:
   postgresql:
   postgresql_data:
   mysql:
+  rancher-vol:
