@@ -19,7 +19,7 @@ services:
     image: pawelmalak/flame
     container_name: poseidon
     volumes:
-      - ./flame/data:/app/data
+      - /mnt/c/Users/mike/portainer/flame:/app/data
     ports:
       - 5005:5005
     environment:
