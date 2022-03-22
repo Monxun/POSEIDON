@@ -4,6 +4,7 @@ services:
   rancher:
     image: rancher/rancher:latest
     container_name: rancher
+    privileged: true
     volumes:
       - rancher-vol:/var/lib/rancher
     restart: unless-stopped
