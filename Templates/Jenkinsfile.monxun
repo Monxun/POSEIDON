@@ -1,0 +1,94 @@
+pipeline {
+
+    agent any
+
+    environment {
+        APP_NAME = 'aline-bank'
+        VERSION = '0.0.1'
+        REGION = 'us-east-1'
+        ECR_URI = 'public.ecr.aws/z7z7g8h8/monxun-aline'
+    }
+
+    stages {
+    
+
+        stage('Get AWS Credentials') {
+            steps {
+                sh """
+                    aws ecr-public get-login-password --region ${REGION} |\
+                     docker login --username AWS --password-stdin ${ECR_URI}
+                """
+            }
+        }
+
+
+        stage("Build & SonarQube Analysis") {
+            steps {
+                sh 'mvn clean package -DskipTests'
+
+            //   withSonarQubeEnv('SONARQUBE') {
+            //     sh 'mvn -B -DskipTests clean package sonar:sonar'
+            //     }
+
+            }
+        }
+
+
+        stage('Build Docker Image') {
+            steps {
+                echo '=== Extracting POM variables & Building Maven Docker Image ==='
+                script {
+                    sh """
+                        VERSION=\$(grep -m 1 "<version>" pom.xml | awk -F'[><]' \'{print \$3}\')
+                        echo \$VERSION
+                        MODULE=\$(grep -m 2 "<module>" pom.xml | tail -1 | awk -F'[><]' \'{print \$3}\')
+                        docker build . \
+                            --build-arg NAME=\${MODULE} \
+                            --build-arg VERSION=\${VERSION} \
+                            --build-arg DIR=\${MODULE} \
+                            -t ${APP_NAME}:${VERSION}
+                    """
+                }
+            }
+        }
+
+
+        stage('Push Docker Image') {
+            steps {
+                echo '=== Pushing Docker Image ==='
+                script {
+                    // create repo if it doesn't already exist
+                    sh """
+                        aws ecr-public create-repository --repository-name ${IMAGE_NAME} || true
+                    """
+                    // add repo tag and push to aws
+                    sh """
+                        docker tag ${APP_NAME}:${VERSION} ${ECR_URI}/${APP_NAME}:${VERSION}
+                        docker push ${ECR_URI}/${APP_NAME} --all-tags
+                    """
+                }
+            }
+        }
+
+
+        stage('Remove Local Images') {
+            steps {
+                echo '=== Delete the local docker images ==='
+                script {
+                    sh("docker rmi -f monxun-aline/${APP_NAME}:${VERSION} || :")
+                }
+            }
+        }
+
+    }
+
+
+    post {
+        always {
+            sh "mvn clean"
+            // sh "docker image rm ${APP_NAME}:${VERSION}"
+        }
+    }
+
+
+}
