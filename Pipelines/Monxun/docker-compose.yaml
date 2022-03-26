@@ -1,44 +1,12 @@
 version: !!str 3
 
 services:
-  rancher:
-    image: rancher/rancher:latest
-    container_name: rancher
-    privileged: true
-    volumes:
-      - rancher-vol:/var/lib/rancher
-    restart: unless-stopped
-    ports:
-      - '543:443'
-      - '144:80'
-    networks:
-      - cicd
-    labels:
-      - "app.dws.name=rancher"
-
-  flame:
-    image: pawelmalak/flame
-    container_name: poseidon
-    volumes:
-      - /mnt/c/Users/mike/portainer/flame:/app/data
-    ports:
-      - 5005:5005
-    environment:
-      - PASSWORD=poseidon
-    restart: unless-stopped
-    networks:
-      - cicd
-    labels:
-      - "app.dws.name=flame"
 
   jenkins:
     image: ssbostan/jenkins:lts-slim
     container_name: jenkins
     restart: unless-stopped
-    environment:
-      - "DOCKER_HOST=tcp://docker:2376"
-      - "DOCKER_TLS_VERIFY=1"
-      - "M2_HOME=/opt/apache-maven-3.8.4"
+    env_file: ./.env
     volumes:
       - "jenkins_data:/var/jenkins_home"
       - "docker_certs_client:/var/jenkins_home/.docker"
@@ -156,7 +124,6 @@ volumes:
   docker_data:
   docker_certs:
   docker_certs_client:
-  gitea_data:
   sonarqube_conf:
   sonarqube_data:
   sonarqube_extensions:
@@ -164,4 +131,3 @@ volumes:
   postgresql:
   postgresql_data:
   mysql:
-  rancher-vol:
